@@ -68,9 +68,14 @@ async function moderate(text, level) {
 
 function renderResult(result) {
   const isFlagged = result.flagged;
+  const isHighlyConfident = result.score > 0.85;
   signal.dataset.state = isFlagged ? "flagged" : "clear";
   status.dataset.state = isFlagged ? "flagged" : "clear";
-  status.textContent = isFlagged ? "Needs a closer look" : "Looks clear";
+  status.textContent = isFlagged
+    ? isHighlyConfident
+      ? "Contains profanity or offensive language"
+      : "Needs a closer look"
+    : "Looks clear";
   resultTitle.textContent = isFlagged ? "Some language was flagged" : "Nothing concerning found";
   score.textContent = `${Math.round(result.score * 100)}%`;
   resultNote.textContent = `${capitalize(result.level)} sensitivity · ${result.flagged_categories.length ? `${result.flagged_categories.length} category flagged` : "No categories flagged"}`;
