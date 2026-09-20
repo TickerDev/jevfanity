@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jevfanity",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-20",
+  "observability": {
+    "enabled": true
+  },
+  "ratelimits": [
+    {
+      "name": "RATE_LIMITER",
+      "namespace_id": "917203",
+      "simple": {
+        "limit": 20,
+        "period": 60
+      }
+    }
+  ],
+  "vars": {
+    "DEFAULT_THRESHOLD": "0.75",
+    "DEFAULT_LEVEL": "medium"
+  }
+}

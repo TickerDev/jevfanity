@@ -1,0 +1,24 @@
+node_modules/
+
+# Local secrets and environment overrides
+.dev.vars*
+.env*
+!.dev.vars.example
+!.env.example
+
+# Cloudflare and build output
+.wrangler/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
