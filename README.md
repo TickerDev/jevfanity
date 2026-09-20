@@ -75,7 +75,8 @@ Example response:
   "processing": {
     "estimated_tokens": 14,
     "chunks": 1,
-    "max_tokens_per_chunk": 100
+    "max_tokens_per_chunk": 100,
+    "unicode_confusable_tokens": 0
   }
 }
 ```
@@ -177,6 +178,7 @@ and the underlying category probabilities for custom policy decisions.
 - Clients can supply a request-specific threshold from `0` to `1`.
 - The Worker limits input to 10,000 characters per request.
 - Text is split into chunks of at most 100 whitespace-delimited tokens with a 10-token overlap. Category scores are the maximum score across all chunks.
+- Unicode text is allowed. Tokens made from lookalike Unicode characters are also compared in normalized form so disguised profanity or slurs can be evaluated by meaning and context. Unicode characters alone never cause a flag.
 - The API allows 20 moderation requests per minute for each client IP in each Cloudflare location. A limited request returns `429` with `Retry-After: 60`.
 - IP-based rate limiting means users on the same shared network may share a limit bucket. Use an authenticated user or API-key identifier instead when the API gains per-user authentication.
 - CORS is open by default. Tighten `Access-Control-Allow-Origin` before using a browser-facing production deployment with sensitive data.

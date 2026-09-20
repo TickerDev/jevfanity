@@ -14,6 +14,7 @@
     "wrangler": "^4.38.0"
   },
   "dependencies": {
-    "@typesafe-ai/sdk": "^0.6.0"
+    "@typesafe-ai/sdk": "^0.6.0",
+    "confusables": "^1.1.1"
   }
 }

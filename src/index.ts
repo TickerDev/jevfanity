@@ -3,6 +3,7 @@ import {
   APITimeoutError,
   TypeSafeClient,
 } from "@typesafe-ai/sdk";
+import type { EntryType } from "@typesafe-ai/sdk";
 import {
   ALL_CATEGORIES,
   ALL_LEVELS,
@@ -17,11 +18,17 @@ import type {
   ModerateRequest,
   ModerationLevel,
 } from "./types";
+import { buildModerationState } from "./unicode";
 
 const MAX_TEXT_LENGTH = 10_000;
 const MAX_CHUNK_TOKENS = 100;
 const CHUNK_OVERLAP_TOKENS = 10;
 const MAX_CONCURRENT_CHUNKS = 4;
+
+type ModerationState = {
+  state: EntryType;
+  confusableTokenCount: number;
+};
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -172,6 +179,13 @@ async function moderate(request: Request, env: Env): Promise<Response> {
   }
 
   const { chunks, estimatedTokenCount } = chunkText(text);
+  const moderationStates: ModerationState[] = chunks.map(
+    buildModerationState,
+  );
+  const confusableTokenCount = moderationStates.reduce(
+    (total, item) => total + item.confusableTokenCount,
+    0,
+  );
 
   try {
     const client = new TypeSafeClient({
@@ -182,13 +196,20 @@ async function moderate(request: Request, env: Env): Promise<Response> {
     const questions = buildQuestions(categories, level);
     const chunkResults = [];
 
-    for (let index = 0; index < chunks.length; index += MAX_CONCURRENT_CHUNKS) {
-      const batch = chunks.slice(index, index + MAX_CONCURRENT_CHUNKS);
+    for (
+      let index = 0;
+      index < moderationStates.length;
+      index += MAX_CONCURRENT_CHUNKS
+    ) {
+      const batch = moderationStates.slice(
+        index,
+        index + MAX_CONCURRENT_CHUNKS,
+      );
       chunkResults.push(
         ...(await Promise.all(
-          batch.map((chunk) =>
+          batch.map(({ state }) =>
             client.systemOne({
-              state: chunk,
+              state,
               model: "jev-latest",
               questions,
             }),
@@ -206,6 +227,7 @@ async function moderate(request: Request, env: Env): Promise<Response> {
           estimated_tokens: estimatedTokenCount,
           chunks: chunks.length,
           max_tokens_per_chunk: MAX_CHUNK_TOKENS,
+          unicode_confusable_tokens: confusableTokenCount,
         },
       },
     );
