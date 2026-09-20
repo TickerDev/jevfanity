@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8787/v1/moderate";
+const API_URL = "https://api.jevfanity.com/v1/moderate";
 const LEVELS = new Set(["low", "medium", "strict"]);
 
 async function main() {

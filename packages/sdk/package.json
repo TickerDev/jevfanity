@@ -1,0 +1,28 @@
+{
+  "name": "jevfanity",
+  "version": "0.1.1",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Typed JavaScript and TypeScript client for the Jevfanity moderation API.",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/sdk.js",
+  "module": "./dist/sdk.js",
+  "types": "./dist/sdk.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/sdk.d.ts",
+      "import": "./dist/sdk.js",
+      "default": "./dist/sdk.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

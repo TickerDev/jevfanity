@@ -90,6 +90,10 @@ npm install
 cp .dev.vars.example .dev.vars
 ```
 
+This repository is an npm workspace monorepo. The Cloudflare Worker lives in `packages/api`, and the publishable client lives in `packages/sdk`. Run `npm run dev` or `npm run deploy` from the repository root for the API, and `npm run build` to build the SDK.
+
+Only the SDK is published to npm. After logging in with `npm login`, preview it with `npm pack --dry-run --workspace jevfanity`, then publish it with `npm run publish:sdk`.
+
 Put your TypeSafe key in `.dev.vars`:
 
 ```env
@@ -154,6 +158,34 @@ if (result.flagged) {
   console.log(result.flagged_categories);
 }
 ```
+
+## npm SDK
+
+Install the typed client:
+
+```bash
+npm install jevfanity
+```
+
+```js
+import Jevfanity from "jevfanity";
+
+const jevfanity = new Jevfanity({
+  baseUrl: "https://api.jevfanity.app",
+  apiKey: process.env.JEVFANITY_API_KEY,
+});
+
+const result = await jevfanity.moderate(message, {
+  level: "medium",
+  categories: ["profanity", "harassment"],
+});
+
+if (result.flagged) {
+  console.log(result.flagged_categories);
+}
+```
+
+The SDK uses the global `fetch`, works in Node.js 18+ and browsers, and accepts a custom `fetch` implementation through the constructor for testing or runtimes with their own HTTP client. Failed HTTP requests throw `JevfanityError` with `status` and parsed `body` properties.
 
 ## Why multiple questions?
 

@@ -1,20 +1,23 @@
 {
-  "name": "jevfanity-worker",
+  "name": "jevfanity-monorepo",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "description": "A tiny profanity and moderation API powered by Jev on Cloudflare Workers.",
+  "description": "Jevfanity moderation API and npm SDK.",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "typecheck": "tsc --noEmit"
+    "build": "npm run build --workspace jevfanity",
+    "dev": "npm run dev --workspace @jevfanity/api",
+    "dev:web": "npx wrangler pages dev packages/web",
+    "deploy": "npm run deploy --workspace @jevfanity/api",
+    "publish:sdk": "npm publish --workspace jevfanity",
+    "typecheck": "npm run typecheck --workspaces"
   },
+  "workspaces": [
+    "packages/api",
+    "packages/sdk",
+    "packages/web"
+  ],
   "devDependencies": {
-    "typescript": "^5.9.2",
-    "wrangler": "^4.38.0"
-  },
-  "dependencies": {
-    "@typesafe-ai/sdk": "^0.6.0",
-    "confusables": "^1.1.1"
+    "typescript": "^5.9.2"
   }
 }

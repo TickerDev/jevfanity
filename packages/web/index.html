@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f0e8" />
+    <meta name="description" content="Check your words before they go live with Jevfanity." />
+    <title>Jevfanity | Say it before you send it</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Jevfanity home">
+          <span class="brand-mark" aria-hidden="true">J</span>
+          <span>jevfanity</span>
+        </a>
+        <div class="topbar-meta">
+          <span class="live-dot"></span>
+          <span>live moderation</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow">Words, with a second opinion</p>
+          <h1 id="page-title">Say it before<br /><span>you send it.</span></h1>
+          <p class="lede">A fast, context-aware profanity check that keeps up while you write.</p>
+        </section>
+
+        <section class="checker" aria-label="Live moderation checker">
+          <div class="checker-head">
+            <div>
+              <p class="section-label">Live check</p>
+              <p class="section-hint">Your text is checked as you type.</p>
+            </div>
+            <label class="level-control">
+              <span>Level</span>
+              <select id="level" aria-label="Moderation level">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="strict">Strict</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="sr-only" for="message">Text to check</label>
+          <textarea id="message" maxlength="10000" placeholder="Start writing here..."></textarea>
+          <div class="editor-footer">
+            <span id="status" class="status" aria-live="polite">Waiting for text</span>
+            <span id="character-count" class="character-count">0 / 10,000</span>
+          </div>
+        </section>
+
+        <section id="result" class="result-panel" aria-live="polite" aria-label="Moderation result">
+          <div class="result-summary">
+            <div class="signal" id="signal" data-state="idle">
+              <span class="signal-icon" aria-hidden="true"></span>
+              <div>
+                <p class="section-label">Signal</p>
+                <h2 id="result-title">Ready when you are</h2>
+              </div>
+            </div>
+            <div class="score-wrap">
+              <span class="score-label">Confidence</span>
+              <strong id="score">--</strong>
+            </div>
+          </div>
+
+          <div class="categories" id="categories">
+            <div class="category-row placeholder-row"><span>Type something above to see category scores</span></div>
+          </div>
+
+          <div class="result-note" id="result-note">Jev evaluates context, not just keywords.</div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Powered by Jev</span>
+        <span class="footer-rule"></span>
+        <a href="https://github.com" target="_blank" rel="noreferrer">Open source API <span aria-hidden="true">↗</span></a>
+      </footer>
+    </div>
+  </body>
+</html>
