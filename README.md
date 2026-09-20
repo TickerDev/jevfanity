@@ -6,12 +6,12 @@ One request to Jev evaluates multiple moderation categories in parallel and retu
 
 ## Hosted version
 
-A public instance is available at [jevfanity.app](https://jevfanity.app).
+A public instance is available at [api.jevfanity.app](https://api.jevfanity.app).
 
 The hosted API is free for the time being. Please use it responsibly and do not abuse the service, evade rate limits, or send unnecessary automated traffic. Availability and free access are not guaranteed and may change as usage and operating costs evolve.
 
 ```bash
-curl -X POST https://jevfanity.app/v1/moderate \
+curl -X POST https://apijevfanity.app/v1/moderate \
   -H "Content-Type: application/json" \
   -d '{"text":"your message here","level":"medium"}'
 ```
