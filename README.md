@@ -81,7 +81,7 @@ Example response:
 }
 ```
 
-`flagged` is true when at least one selected category violates the chosen level's policy with a score that meets or exceeds the confidence threshold.
+`flagged` is true when at least one selected category violates the chosen level's policy with a score that meets or exceeds the confidence threshold. `needs_review` is true for a non-flagged result with a category score of at least `0.5`, providing a review state for moderate signals without treating them as definitive violations.
 
 ## Setup
 

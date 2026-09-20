@@ -20,6 +20,7 @@ export const ALL_CATEGORIES: Category[] = [
 ];
 
 export const ALL_LEVELS: ModerationLevel[] = ["low", "medium", "strict"];
+export const REVIEW_THRESHOLD = 0.5;
 
 const QUESTIONS: Record<Category, Omit<QuestionDefinition, "criteria">> = {
   profanity: {
@@ -231,6 +232,11 @@ export function formatModerationResult(
   const flaggedCategories = categories.filter(
     (category) => scores[category] >= threshold,
   );
+  const reviewCategories = categories.filter(
+    (category) =>
+      scores[category] >= REVIEW_THRESHOLD &&
+      scores[category] < threshold,
+  );
 
   const maxScore =
     categories.length > 0
@@ -239,11 +245,14 @@ export function formatModerationResult(
 
   return {
     flagged: flaggedCategories.length > 0,
+    needs_review: flaggedCategories.length === 0 && reviewCategories.length > 0,
     score: maxScore,
     level,
     threshold,
+    review_threshold: REVIEW_THRESHOLD,
     categories: scores,
     flagged_categories: flaggedCategories,
+    review_categories: reviewCategories,
     model: response.model,
     usage: response.usage ?? null,
   };

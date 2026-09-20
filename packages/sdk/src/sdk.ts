@@ -19,11 +19,14 @@ export interface ModerateRequest extends ModerateOptions {
 
 export interface ModerationResult {
   flagged: boolean;
+  needs_review: boolean;
   score: number;
   level: ModerationLevel;
   threshold: number;
+  review_threshold: number;
   categories: Record<Category, number>;
   flagged_categories: Category[];
+  review_categories: Category[];
   model: string;
   usage: {
     input_tokens: number;

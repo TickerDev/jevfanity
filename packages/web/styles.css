@@ -68,6 +68,7 @@ textarea::placeholder { color: #b1aea4; }
 .editor-footer { display: flex; justify-content: space-between; padding: 12px 22px 18px; color: var(--muted); font-family: var(--mono); font-size: 11px; }
 .status { transition: color 180ms ease; }
 .status[data-state="flagged"] { color: var(--coral); }
+.status[data-state="review"] { color: var(--blue); }
 .status[data-state="clear"] { color: var(--acid-deep); }
 
 .result-panel { margin-top: 54px; padding: 28px 22px 22px; }
@@ -76,6 +77,7 @@ textarea::placeholder { color: #b1aea4; }
 .signal-icon { width: 18px; height: 18px; border: 2px solid var(--muted); border-radius: 50%; }
 .signal[data-state="clear"] .signal-icon { border-color: var(--acid-deep); background: var(--acid); }
 .signal[data-state="flagged"] .signal-icon { border-color: var(--coral); background: var(--coral); }
+.signal[data-state="review"] .signal-icon { border-color: var(--blue); background: var(--blue); }
 .signal[data-state="loading"] .signal-icon { border-color: var(--blue); border-right-color: transparent; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 h2 { margin: 5px 0 0; font-size: 25px; letter-spacing: -0.025em; font-weight: 500; }

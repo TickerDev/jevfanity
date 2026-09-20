@@ -68,17 +68,25 @@ async function moderate(text, level) {
 
 function renderResult(result) {
   const isFlagged = result.flagged;
+  const needsReview = result.needs_review ?? (!isFlagged && result.score >= 0.5);
   const isHighlyConfident = result.score > 0.85;
-  signal.dataset.state = isFlagged ? "flagged" : "clear";
-  status.dataset.state = isFlagged ? "flagged" : "clear";
+  const state = isFlagged ? "flagged" : needsReview ? "review" : "clear";
+  signal.dataset.state = state;
+  status.dataset.state = state;
   status.textContent = isFlagged
     ? isHighlyConfident
       ? "Contains profanity or offensive language"
       : "Needs a closer look"
+    : needsReview
+      ? "Needs a closer look"
     : "Looks clear";
-  resultTitle.textContent = isFlagged ? "Some language was flagged" : "Nothing concerning found";
+  resultTitle.textContent = isFlagged
+    ? "Some language was flagged"
+    : needsReview
+      ? "This may need a closer look"
+      : "Nothing concerning found";
   score.textContent = `${Math.round(result.score * 100)}%`;
-  resultNote.textContent = `${capitalize(result.level)} sensitivity · ${result.flagged_categories.length ? `${result.flagged_categories.length} category flagged` : "No categories flagged"}`;
+  resultNote.textContent = `${capitalize(result.level)} sensitivity · ${isFlagged ? `${result.flagged_categories.length} category flagged` : needsReview ? "Moderate signal · review recommended" : "No categories flagged"}`;
   categoryList.innerHTML = categories.map((category) => {
     const value = result.categories[category] || 0;
     const flagged = result.flagged_categories.includes(category);
