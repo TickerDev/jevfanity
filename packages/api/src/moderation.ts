@@ -25,27 +25,27 @@ const QUESTIONS: Record<Category, Omit<QuestionDefinition, "criteria">> = {
   profanity: {
     type: "noul",
     instructions:
-      "Does the text violate this policy's rule for profanity or vulgar language?",
+      "Does the text violate this policy's rule for profanity or vulgar language? Consider language-specific slang and context.",
   },
   slur: {
     type: "noul",
     instructions:
-      "Does the text violate this policy's rule for slurs or group-based epithets?",
+      "Does the text violate this policy's rule for slurs or group-based epithets? Consider language-specific slang and context.",
   },
   harassment: {
     type: "noul",
     instructions:
-      "Does the text violate this policy's rule for harassment or targeted abuse?",
+      "Does the text violate this policy's rule for harassment or targeted abuse? Consider language-specific slang and context.",
   },
   threat: {
     type: "noul",
     instructions:
-      "Does the text violate this policy's rule for threats or intimidation?",
+      "Does the text violate this policy's rule for threats or intimidation? Consider language-specific slang and context.",
   },
   sexual: {
     type: "noul",
     instructions:
-      "Does the text violate this policy's rule for sexual language or content?",
+      "Does the text violate this policy's rule for sexual language or content? Consider language-specific slang and context.",
   },
 };
 
