@@ -9,9 +9,18 @@ const resultTitle = document.querySelector("#result-title");
 const score = document.querySelector("#score");
 const categoryList = document.querySelector("#categories");
 const resultNote = document.querySelector("#result-note");
+const sampleButtons = document.querySelectorAll("[data-sample]");
 
 let timer;
 let controller;
+
+sampleButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    messageInput.value = button.dataset.sample;
+    messageInput.dispatchEvent(new Event("input", { bubbles: true }));
+    messageInput.focus();
+  });
+});
 
 messageInput.addEventListener("input", () => {
   const text = messageInput.value;

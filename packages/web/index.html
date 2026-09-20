@@ -23,6 +23,10 @@
           <span class="live-dot"></span>
           <span>live moderation</span>
         </div>
+        <nav class="topnav" aria-label="Page navigation">
+          <a href="#how-it-works">How it works</a>
+          <a href="#resources">Resources</a>
+        </nav>
       </header>
 
       <main>
@@ -77,12 +81,79 @@
 
           <div class="result-note" id="result-note">Jev evaluates context, not just keywords.</div>
         </section>
+
+          <section class="story-section" id="how-it-works" aria-labelledby="how-title">
+            <div class="section-intro">
+              <p class="eyebrow">A tiny moderation stack</p>
+              <h2 id="how-title">Small surface.<br /><span>Thoughtful underneath.</span></h2>
+            </div>
+            <div class="story-copy">
+              <p>Jevfanity turns one sentence into a set of focused moderation questions. That keeps the result legible: you get one overall signal, plus the category scores that explain it.</p>
+              <p>The API runs on Cloudflare Workers. The browser demo and the npm client both talk to the same small HTTP contract.</p>
+            </div>
+            <div class="steps">
+              <article class="step-card">
+                <span class="step-number">01</span>
+                <h3>Ask clearly</h3>
+                <p>Jev receives one focused question for profanity, slurs, harassment, threats, and sexual content.</p>
+              </article>
+              <article class="step-card">
+                <span class="step-number">02</span>
+                <h3>Read context</h3>
+                <p>Long text is chunked, lookalike Unicode is normalized, and each category keeps its strongest signal.</p>
+              </article>
+              <article class="step-card">
+                <span class="step-number">03</span>
+                <h3>Return detail</h3>
+                <p>Applications get a simple flagged value, confidence scores, selected policy level, and usage metadata.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="try-section" aria-labelledby="try-title">
+            <div>
+              <p class="eyebrow">For fun, try a signal</p>
+              <h2 id="try-title">Test the little<br /><span>decision engine.</span></h2>
+            </div>
+            <div class="sample-list">
+              <button class="sample-button" type="button" data-sample="Thanks for the thoughtful answer.">Clean note <span aria-hidden="true">+</span></button>
+              <button class="sample-button" type="button" data-sample="This is freaking annoying.">Mild frustration <span aria-hidden="true">+</span></button>
+              <button class="sample-button" type="button" data-sample="You are being a real jerk today.">Targeted insult <span aria-hidden="true">+</span></button>
+            </div>
+          </section>
+
+          <section class="resources-section" id="resources" aria-labelledby="resources-title">
+            <div class="section-intro">
+              <p class="eyebrow">Take it with you</p>
+              <h2 id="resources-title">See the parts.<br /><span>Use the parts.</span></h2>
+            </div>
+            <div class="resource-grid">
+              <a class="resource-card" href="https://www.npmjs.com/package/jevfanity" target="_blank" rel="noreferrer">
+                <span class="resource-kind">npm package</span>
+                <strong>jevfanity</strong>
+                <span class="resource-description">A typed ESM client for Node, browsers, and any runtime with fetch.</span>
+                <span class="resource-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="resource-card" href="https://github.com/TickerDev/jevfanity#api" target="_blank" rel="noreferrer">
+                <span class="resource-kind">API docs</span>
+                <strong>Read the contract</strong>
+                <span class="resource-description">Endpoints, policy levels, categories, limits, and example responses.</span>
+                <span class="resource-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="resource-card" href="https://github.com/TickerDev/jevfanity/blob/main/scripts/test-jevfanity.js" target="_blank" rel="noreferrer">
+                <span class="resource-kind">testing, just because</span>
+                <strong>Run the script</strong>
+                <span class="resource-description">A tiny command-line test for sending sample text to the local Worker.</span>
+                <span class="resource-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
       </main>
 
       <footer class="footer">
         <span>Powered by Jev</span>
         <span class="footer-rule"></span>
-        <a href="https://github.com" target="_blank" rel="noreferrer">Open source API <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/TickerDev/jevfanity" target="_blank" rel="noreferrer">Open source API <span aria-hidden="true">↗</span></a>
       </footer>
     </div>
   </body>
