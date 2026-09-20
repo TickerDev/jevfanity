@@ -4,6 +4,18 @@ A tiny profanity + moderation API powered by **Jev** and deployed on **Cloudflar
 
 One request to Jev evaluates multiple moderation categories in parallel and returns a probability for each one.
 
+## Hosted version
+
+A public instance is available at [jevfanity.app](https://jevfanity.app).
+
+The hosted API is free for the time being. Please use it responsibly and do not abuse the service, evade rate limits, or send unnecessary automated traffic. Availability and free access are not guaranteed and may change as usage and operating costs evolve.
+
+```bash
+curl -X POST https://jevfanity.app/v1/moderate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"your message here","level":"medium"}'
+```
+
 ## API
 
 ### `POST /v1/moderate`
@@ -118,7 +130,7 @@ Authorization: Bearer YOUR_JEVFANITY_API_KEY
 ## Example
 
 ```bash
-curl -X POST https://your-worker.workers.dev/v1/moderate \
+curl -X POST https://jevfanity.app/v1/moderate \
   -H "Content-Type: application/json" \
   -d '{"text":"this is fucking awful","level":"medium"}'
 ```
@@ -126,7 +138,7 @@ curl -X POST https://your-worker.workers.dev/v1/moderate \
 ## Browser usage
 
 ```js
-const result = await fetch("https://your-worker.workers.dev/v1/moderate", {
+const result = await fetch("https://jevfanity.app/v1/moderate", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -168,3 +180,11 @@ and the underlying category probabilities for custom policy decisions.
 - The API allows 20 moderation requests per minute for each client IP in each Cloudflare location. A limited request returns `429` with `Retry-After: 60`.
 - IP-based rate limiting means users on the same shared network may share a limit bucket. Use an authenticated user or API-key identifier instead when the API gains per-user authentication.
 - CORS is open by default. Tighten `Access-Control-Allow-Origin` before using a browser-facing production deployment with sensitive data.
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, development, and pull request guidance.
+
+## License
+
+Jevfanity is available under the [MIT License](LICENSE).

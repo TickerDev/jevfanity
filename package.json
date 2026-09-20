@@ -2,6 +2,7 @@
   "name": "jevfanity-worker",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "A tiny profanity and moderation API powered by Jev on Cloudflare Workers.",
   "scripts": {
     "dev": "wrangler dev",
