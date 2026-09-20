@@ -3,5 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "description": "Jevfanity live moderation landing page."
+  "description": "Jevfanity live moderation landing page.",
+  "devDependencies": {
+    "wrangler": "^4.38.0"
+  }
 }
